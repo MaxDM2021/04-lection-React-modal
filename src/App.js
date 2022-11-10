@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import  VideoList  from './components/VideoList/VideoList';
+import  Player from './components/Player/Player';
+import videos from './videos.json';
+import Reader from './components/Reader/Reader'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import publications from './publications.json'
+
+class App extends Component {
+  state = {
+    selectedVideo: null,
+  };
+
+  selectVideo = link => {
+    this.setState({ selectedVideo: link });
+
+
+
+
+
+  };
+
+  render() {
+    return (
+      <div style={{ padding: 24 }}>
+        <h1>Selected video: {this.state.selectedVideo}</h1>
+        <VideoList videos={videos} onSelect={this.selectVideo} />
+        <Player url={this.state.selectedVideo} />
+        <Reader items={publications}/>
+        </div>
+    );
+  }
 }
 
 export default App;
